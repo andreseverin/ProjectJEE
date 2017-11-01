@@ -9,7 +9,7 @@
     </h:head>
     <h:body>
         <p:dataList value="#{ingredientsCtrl.ingredients}" var="ingred" type="ordered" style="width:50%;text-align: left;">
-            #{ingred.nom}   
+            <h:graphicImage value="#{ingred.image}"/>
         </p:dataList>
     </h:body>
 </html>
