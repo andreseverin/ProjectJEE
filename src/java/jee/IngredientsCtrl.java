@@ -7,8 +7,8 @@ package jee;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 /**
@@ -25,37 +25,12 @@ public class IngredientsCtrl implements Serializable{
     private Ingredients ingred;
     private Ingredients selectedIngred;
 
-    public IngredientsDAO getDao() {
-        return dao;
+    public IngredientsCtrl() {
+        this.ingred = new Ingredients();
     }
 
-    public void setDao(IngredientsDAO dao) {
-        this.dao = dao;
-    }
-
-    public Ingredients getIngred() {
-        return ingred;
-    }
-
-    public void setIngred(Ingredients ingred) {
-        this.ingred = ingred;
-    }
-
-    public Ingredients getSelectedIngred() {
-        return selectedIngred;
-    }
-
-    public void setSelectedIngred(Ingredients selectedIngred) {
-        this.selectedIngred = selectedIngred;
-    }
-    
-    public IngredientsCtrl(){
-        ingred = new Ingredients();
-    }
-    
-    public List<Ingredients> getEtudiants(){
+    public List<Ingredients> getIngredients(){
         return dao.allIngredients();
     }
-    
     
 }

@@ -19,12 +19,13 @@ import javax.persistence.Query;
 @Stateless
 public class IngredientsDAO {
     
-    @PersistenceContext(unitName = "projetJEEPU")
+    @PersistenceContext(unitName = "ProjectJEEPU")
     private EntityManager em;
     
     public List<Ingredients> allIngredients(){
         Query query = em.createNamedQuery("Ingredients.findAll");
         return query.getResultList();
     }
+    
     
 }
