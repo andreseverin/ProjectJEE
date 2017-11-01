@@ -1,0 +1,7 @@
+/build/
+/dist/
+nbproject/
+
+src/conf/
+
+web/WEB-INF/
