@@ -3,13 +3,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Fabrique ton burger !</title>
     </h:head>
-    <h:body>
-        <p:dataList value="#{ingredientsCtrl.ingredients}" var="ingred" type="ordered">
-            <h:graphicImage value="res/img/#{ingred.image}" height="200px" width="200px"/>
-        </p:dataList>
+    <h:body>   
+        <header style="background: #3498db; height: 100px;position: relative; margin: -10px; color: #ecf0f1;">
+            <center style="font-size: 200%;padding-top: 20px;">
+                FABRIQUE TON BURGER ! 
+            </center>        
+        </header>
+        <div style="float:left;width: 30%;text-align: center;margin-top: 15%;font-size:30px;">
+            <c:forEach items="#{ingredientsCtrl.ingredients}" var="ingred">
+                <div class="ui-g"> 
+                    <div class="ui-g-1 ui-md-1 ui-lg-1">#{ingred.nom}</div>
+                </div>
+            </c:forEach>
+        </div>
+        <div style="float:right;width: 30%;text-align: right;margin-right: 15%;">
+            <div class="ui-g" style="height: 150px;"> 
+                    <div class="ui-g-1 ui-md-1 ui-lg-1"><h:graphicImage value="res/img/burger_top.png" height="400px" width="400px"/></div>
+            </div>
+            <c:forEach items="#{ingredientsCtrl.ingredients}" var="ingred">
+                <div class="ui-g" style="height: 150px;margin-left: 5%;"> 
+                    <div class="ui-g-1 ui-md-1 ui-lg-1"><h:graphicImage value="res/img/#{ingred.image}" height="400px" width="400px"/></div>
+                </div>
+            </c:forEach>
+            <div class="ui-g" style="height: 150px;"> 
+                    <div class="ui-g-1 ui-md-1 ui-lg-1"><h:graphicImage value="res/img/burger_bottom.png" height="400px" width="400px"/></div>
+            </div>
+        </div>
     </h:body>
 </html>
