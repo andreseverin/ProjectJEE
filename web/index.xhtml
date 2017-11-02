@@ -15,18 +15,19 @@
                 FABRIQUE TON BURGER ! 
             </center>        
         </header>
-        <div style="float:left;width: 30%;text-align: center;margin-top: 15%;font-size:30px;">
+        <div style="float:left;width: 30%;text-align: center;margin-top: 15%;">
             <c:forEach items="#{ingredientsCtrl.ingredients}" var="ingred">
-                <div class="ui-g"> 
-                    <div class="ui-g-1 ui-md-1 ui-lg-1">#{ingred.nom}</div>
+                <div class="ui-g" style="margin: 30px;"> 
+                    <div class="ui-g-12 ui-lg-10" style="font-size:40px;display: inline-block;">#{ingred.nom}</div>
+                    <div class="ui-g-12 ui-lg-2"><p:button icon="ui-icon-plus" title="Icon Only" style="margin-top: 40%;"/></div>
                 </div>
             </c:forEach>
         </div>
         <div style="float:right;width: 30%;text-align: right;margin-right: 15%;">
             <div class="ui-g" style="height: 150px;"> 
-                    <div class="ui-g-1 ui-md-1 ui-lg-1"><h:graphicImage value="res/img/burger_top.png" height="400px" width="400px"/></div>
+                <div class="ui-g-1 ui-md-1 ui-lg-1"><h:graphicImage value="res/img/burger_top.png" height="400px" width="400px"/></div>
             </div>
-            <c:forEach items="#{ingredientsCtrl.ingredients}" var="ingred">
+            <c:forEach items="#{ingredientsCtrl.composition}" var="ingred">
                 <div class="ui-g" style="height: 150px;margin-left: 5%;"> 
                     <div class="ui-g-1 ui-md-1 ui-lg-1"><h:graphicImage value="res/img/#{ingred.image}" height="400px" width="400px"/></div>
                 </div>

@@ -24,6 +24,8 @@ public class IngredientsCtrl implements Serializable{
     private IngredientsDAO dao;
     private Ingredients ingred;
     private Ingredients selectedIngred;
+    private List<Ingredients> composition;
+
 
     public IngredientsCtrl() {
         this.ingred = new Ingredients();
@@ -32,5 +34,43 @@ public class IngredientsCtrl implements Serializable{
     public List<Ingredients> getIngredients(){
         return dao.allIngredients();
     }
+    
+    public void addIngredient(){
+        composition.add(selectedIngred);
+        this.selectedIngred = new Ingredients();
+    }
+
+    public IngredientsDAO getDao() {
+        return dao;
+    }
+
+    public void setDao(IngredientsDAO dao) {
+        this.dao = dao;
+    }
+
+    public Ingredients getIngred() {
+        return ingred;
+    }
+
+    public void setIngred(Ingredients ingred) {
+        this.ingred = ingred;
+    }
+
+    public Ingredients getSelectedIngred() {
+        return selectedIngred;
+    }
+
+    public void setSelectedIngred(Ingredients selectedIngred) {
+        this.selectedIngred = selectedIngred;
+    }
+
+    public List<Ingredients> getComposition() {
+        return composition;
+    }
+
+    public void setComposition(List<Ingredients> composition) {
+        this.composition = composition;
+    }
+    
     
 }
