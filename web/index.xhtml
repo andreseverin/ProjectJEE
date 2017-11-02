@@ -8,9 +8,8 @@
         <title>Fabrique ton burger !</title>
     </h:head>
     <h:body>
-        <p:dataList value="#{ingredientsCtrl.ingredients}" var="ingred" type="ordered" style="width:50%;text-align: left;">
-            <h:graphicImage value="#{ingred.image}"/>
+        <p:dataList value="#{ingredientsCtrl.ingredients}" var="ingred" type="ordered">
+            <h:graphicImage value="res/img/#{ingred.image}" height="200px" width="200px"/>
         </p:dataList>
     </h:body>
 </html>
-
