@@ -16,10 +16,14 @@
             </center>        
         </header>
         <div style="float:left;width: 30%;text-align: center;margin-top: 15%;">
-            <c:forEach items="#{ingredientsCtrl.ingredients}" var="ingred">
+            <c:forEach items="#{ingredientsCtrl.ingredients}" var="ingred" >
                 <div class="ui-g" style="margin: 30px;"> 
                     <div class="ui-g-12 ui-lg-10" style="font-size:40px;display: inline-block;">#{ingred.nom}</div>
-                    <div class="ui-g-12 ui-lg-2"><p:button icon="ui-icon-plus" title="Icon Only" style="margin-top: 40%;"/></div>
+                    <div class="ui-g-12 ui-lg-2">
+                        <h:form>
+                            <h:commandButton action="#{ingredientsCtrl.addIngred(ingred)}" value="+"/>
+                        </h:form>
+                    </div>
                 </div>
             </c:forEach>
         </div>

@@ -29,15 +29,11 @@ public class IngredientsCtrl implements Serializable{
 
     public IngredientsCtrl() {
         this.ingred = new Ingredients();
+        this.selectedIngred = new Ingredients();
     }
 
     public List<Ingredients> getIngredients(){
         return dao.allIngredients();
-    }
-    
-    public void addIngredient(){
-        composition.add(selectedIngred);
-        this.selectedIngred = new Ingredients();
     }
 
     public IngredientsDAO getDao() {
@@ -70,6 +66,10 @@ public class IngredientsCtrl implements Serializable{
 
     public void setComposition(List<Ingredients> composition) {
         this.composition = composition;
+    }
+    
+    public void addIngred(Ingredients ing){
+        composition.add(ing);
     }
     
     
