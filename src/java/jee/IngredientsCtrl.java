@@ -63,8 +63,11 @@ public class IngredientsCtrl implements Serializable{
     }
     
     public void addIngred(Ingredients ing){
-        composition.add(ing);
-        
+        composition.add(ing);   
+    }
+    
+    public void removeIngred(Ingredients ing){
+        composition.remove(ing);   
     }
     
     

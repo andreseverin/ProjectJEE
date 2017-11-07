@@ -16,26 +16,27 @@
             </center>        
         </header>
         
-        <div style="float:left;width: 40%;text-align: center;margin-top: 15%;">
+        <div style="float:left;width: 40%;text-align: center;margin-top: 2%;">
             <h:form id="form">
                 <c:forEach items="#{ingredientsCtrl.ingredients}" var="ingred">
                     <p:panelGrid columns="3" layout="grid" style="border:solid 2px white;"> 
                         <div style="font-size:40px;">#{ingred.nom}</div>
-                        <h:commandButton value="+" action="#{ingredientsCtrl.addIngred(ingred)}" style="font-size: 30px;width:40px;background:#3498db;color:white;"/>   
+                        <h:commandButton value="+" action="#{ingredientsCtrl.addIngred(ingred)}" style="font-size: 30px;width:40px;background:#3498db;color:white;"/>  
+                        <h:commandButton value="-" action="#{ingredientsCtrl.removeIngred(ingred)}" style="font-size: 30px;width:40px;background:#3498db;color:white;"/>
                     </p:panelGrid>
                 </c:forEach>
             </h:form> 
         </div>
-        <div style="float:right;width: 30%;text-align: center;padding:0;background:black;border: solid 10px #3498db;margin-top: 2%;">
-            <div class="ui-g" style="height: 150px;padding-top: 20%;"> 
+        <div style="float:right;width: 30%;text-align: center;padding:0;background:black;border: solid 10px #3498db;margin-top: 2%;margin-right: 10%">
+            <div class="ui-g" style="height: 100px;padding-top: 20%;"> 
                 <div class="ui-g-12"><h:graphicImage value="res/img/burger_top.png" style="max-height: 200px; max-width: 200px;"/></div> 
             </div>
             <c:forEach items="#{ingredientsCtrl.composition}" var="ingred">
-                <div class="ui-g" style="height: 150px;"> 
+                <div class="ui-g" style="height: 100px;"> 
                     <div class="ui-g-12"><h:graphicImage value="res/img/#{ingred.image}" style="max-height: 200px; max-width: 200px;"/></div>
                 </div>
             </c:forEach>
-            <div class="ui-g" style="height: 150px;padding-bottom: 10%"> 
+            <div class="ui-g" style="height: 100px;padding-bottom: 20%"> 
                     <div class="ui-g-12"><h:graphicImage value="res/img/burger_bottom.png" style="max-height: 200px; max-width: 200px;"/></div>
             </div>
         </div>
