@@ -15,29 +15,30 @@
                 FABRIQUE TON BURGER ! 
             </center>        
         </header>
+        
         <div style="float:left;width: 30%;text-align: center;margin-top: 15%;">
-            <c:forEach items="#{ingredientsCtrl.ingredients}" var="ingred" >
-                <div class="ui-g" style="margin: 30px;"> 
-                    <div class="ui-g-12 ui-lg-10" style="font-size:40px;display: inline-block;">#{ingred.nom}</div>
-                    <div class="ui-g-12 ui-lg-2">
-                        <h:form>
-                            <h:commandButton action="#{ingredientsCtrl.addIngred(ingred)}" value="+"/>
-                        </h:form>
+            <h:form id="form">
+                <c:forEach items="#{ingredientsCtrl.ingredients}" var="ingred">
+                    <div class="ui-g" style="margin: 30px;"> 
+                        <div class="ui-g-12 ui-lg-8" style="font-size:40px;">#{ingred.nom}</div>
+                        <div class="ui-g-12 ui-lg-2">
+                            <h:commandButton value="+" action="#{ingredientsCtrl.addIngred(ingred)}" style="font-size: 30px;width:10%;background:#3498db;color:white;"/>  
+                        </div>              
                     </div>
-                </div>
-            </c:forEach>
+                </c:forEach>
+            </h:form> 
         </div>
-        <div style="float:right;width: 30%;text-align: right;margin-right: 15%;">
-            <div class="ui-g" style="height: 150px;"> 
-                <div class="ui-g-1 ui-md-1 ui-lg-1"><h:graphicImage value="res/img/burger_top.png" height="400px" width="400px"/></div>
+        <div style="float:right;width: 30%;text-align: right;padding-right: 15%;background:black;border: solid 10px #3498db;margin-top: 2%;">
+            <div class="ui-g" style="height: 150px;padding-top: 20%;"> 
+                    <div class="ui-g-1 ui-md-1 ui-lg-1"><h:graphicImage value="res/img/burger_top.png" style="max-height: 200px; max-width: 200px;"/></div>
             </div>
             <c:forEach items="#{ingredientsCtrl.composition}" var="ingred">
-                <div class="ui-g" style="height: 150px;margin-left: 5%;"> 
-                    <div class="ui-g-1 ui-md-1 ui-lg-1"><h:graphicImage value="res/img/#{ingred.image}" height="400px" width="400px"/></div>
+                <div class="ui-g" style="height: 150px;padding-left: 5%;"> 
+                    <div class="ui-g-1 ui-md-1 ui-lg-1"><h:graphicImage value="res/img/#{ingred.image}" style="max-height: 200px; max-width: 200px;"/></div>
                 </div>
             </c:forEach>
             <div class="ui-g" style="height: 150px;"> 
-                    <div class="ui-g-1 ui-md-1 ui-lg-1"><h:graphicImage value="res/img/burger_bottom.png" height="400px" width="400px"/></div>
+                    <div class="ui-g-1 ui-md-1 ui-lg-1"><h:graphicImage value="res/img/burger_bottom.png" style="max-height: 200px; max-width: 200px;"/></div>
             </div>
         </div>
     </h:body>

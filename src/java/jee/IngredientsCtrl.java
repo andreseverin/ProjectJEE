@@ -5,11 +5,14 @@
  */
 package jee;
 
+import java.io.Console;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import static sun.misc.Version.print;
 
 /**
  *
@@ -22,14 +25,13 @@ public class IngredientsCtrl implements Serializable{
     
     @EJB
     private IngredientsDAO dao;
-    private Ingredients ingred;
     private Ingredients selectedIngred;
     private List<Ingredients> composition;
 
 
     public IngredientsCtrl() {
-        this.ingred = new Ingredients();
         this.selectedIngred = new Ingredients();
+        composition = new ArrayList<Ingredients>();
     }
 
     public List<Ingredients> getIngredients(){
@@ -42,14 +44,6 @@ public class IngredientsCtrl implements Serializable{
 
     public void setDao(IngredientsDAO dao) {
         this.dao = dao;
-    }
-
-    public Ingredients getIngred() {
-        return ingred;
-    }
-
-    public void setIngred(Ingredients ingred) {
-        this.ingred = ingred;
     }
 
     public Ingredients getSelectedIngred() {
@@ -70,6 +64,7 @@ public class IngredientsCtrl implements Serializable{
     
     public void addIngred(Ingredients ing){
         composition.add(ing);
+        
     }
     
     
