@@ -70,5 +70,9 @@ public class IngredientsCtrl implements Serializable{
         composition.remove(ing);   
     }
     
+    public void resetIngred(){
+        composition.clear();   
+    }
+    
     
 }
