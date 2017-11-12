@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Fabrique ton burger !</title>
+    </h:head>
+    <h:body>   
+        
+        <header style="background: #3498db; height: 100px;position: relative; margin: -10px; color: #ecf0f1;padding-top: 1%;">
+            <h:outputText value="FABRIQUE TON BURGER ! " style="font-size: 200%;padding-top: 20px;display: inline-block;margin-left: 3%;"/>   
+
+            <p:commandButton id="disconnect" value="Deconnection" oncomplete="disconnect()" actionListener="#{customerCtrl.disconnect()}" action="index" style="float: right;margin-top: 15px;margin-right: 3%;" />
+        </header>
+        
+        <div style="float:left;width: 40%;text-align: center;margin-top: 2%;">
+            <h:form id="form">
+                <c:forEach items="#{ingredientsCtrl.ingredients}" var="ingred">
+                    <p:panelGrid columns="3" layout="grid" style="border:solid 2px white;"> 
+                        <div style="font-size:40px;">#{ingred.nom}</div>
+                        <h:commandButton value="+" action="#{possedeCtrl.addIngred(ingred)}" style="font-size: 30px;width:40px;background:#3498db;color:white;"/>  
+                        <h:commandButton value="-" action="#{possedeCtrl.removeIngred(ingred)}" style="font-size: 30px;width:40px;background:#3498db;color:white;"/>
+                    </p:panelGrid>
+                </c:forEach>
+                <p:commandButton value="Reset" ajax="false" action="#{possedeCtrl.clearCompo()}" style="font-size: 30px;margin: 3%;" />
+                <p:commandButton value="Valider" ajax="false" action="#{possedeCtrl.createCustomerBurger()}" style="font-size: 30px;margin: 3%;" />
+            </h:form> 
+        </div>
+        <div style="float:right;width: 30%;text-align: center;padding:0;background:black;border: solid 10px #3498db;margin-top: 2%;margin-right: 10%;min-height: 600px;">
+            <div class="ui-g" style="height: 100px;padding-top: 20%;"> 
+                <div class="ui-g-12"><h:graphicImage value="res/img/burger_top.png" style="max-height: 200px; max-width: 200px;"/></div> 
+            </div>
+            <c:forEach items="#{possedeCtrl.composition}" var="ingred">
+                <div class="ui-g" style="height: 100px;"> 
+                    <div class="ui-g-12"><h:graphicImage value="res/img/#{ingred.image}" style="max-height: 200px; max-width: 200px;"/></div>
+                </div>
+            </c:forEach>
+            <div class="ui-g" style="height: 100px;padding-bottom: 20%"> 
+                    <div class="ui-g-12"><h:graphicImage value="res/img/burger_bottom.png" style="max-height: 200px; max-width: 200px;"/></div>
+            </div>
+        </div>
+        
+        
+
+    </h:body>
+</html>

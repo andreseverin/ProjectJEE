@@ -37,6 +37,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Customer.findByPassword", query = "SELECT c FROM Customer c WHERE c.password = :password")})
 public class Customer implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCustomer")
+    private Collection<Possede> possedeCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,15 +56,12 @@ public class Customer implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "password")
     private String password;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCustomer")
-    private Collection<Burger> burgerCollection;
 
     public Customer() {
     }
 
     public Customer(Integer idCustomer) {
         this.idCustomer = idCustomer;
-        
     }
 
     public Customer(Integer idCustomer, String name, String password) {
@@ -94,15 +94,6 @@ public class Customer implements Serializable {
         this.password = password;
     }
 
-    @XmlTransient
-    public Collection<Burger> getBurgerCollection() {
-        return burgerCollection;
-    }
-
-    public void setBurgerCollection(Collection<Burger> burgerCollection) {
-        this.burgerCollection = burgerCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -126,6 +117,15 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "jee.Customer[ idCustomer=" + idCustomer + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Possede> getPossedeCollection() {
+        return possedeCollection;
+    }
+
+    public void setPossedeCollection(Collection<Possede> possedeCollection) {
+        this.possedeCollection = possedeCollection;
     }
     
 }

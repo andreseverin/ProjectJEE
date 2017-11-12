@@ -8,76 +8,58 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Fabrique ton burger !</title>
-        <script type="text/javascript">
-            function handleLoginRequest(xhr, status, args) {
-                if(args.validationFailed || !args.loggedIn) {
-                    PF('dlg').jq.effect("shake", {times:5}, 100);
-                }
-                else {
-                    PF('dlg').hide();
-                    $('#loginLink').fadeOut();
-                }
-            }
-        </script>
     </h:head>
     <h:body>   
         
+        
         <header style="background: #3498db; height: 100px;position: relative; margin: -10px; color: #ecf0f1;padding-top: 1%;">
-            <h:outputText value="FABRIQUE TON BURGER ! " style="font-size: 200%;padding-top: 20px;display: inline-block;margin-left: 3%;"/>   
-            
-            <h:form style="float: right;display: inline-block;margin-right: 3%;">
-            <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
-                <h:graphicImage value="res/img/user.png" style="max-height: 80px; max-width: 80px;"/>
-            </h:outputLink>
-            </h:form>
+            <h:outputText value="FABRIQUE TON BURGER ! " style="font-size: 200%;padding-top: 20px;display: inline-block;margin-left: 3%;"/> 
         </header>
         
-        <div style="float:left;width: 40%;text-align: center;margin-top: 2%;">
-            <h:form id="form">
-                <c:forEach items="#{ingredientsCtrl.ingredients}" var="ingred">
-                    <p:panelGrid columns="3" layout="grid" style="border:solid 2px white;"> 
-                        <div style="font-size:40px;">#{ingred.nom}</div>
-                        <h:commandButton value="+" action="#{ingredientsCtrl.addIngred(ingred)}" style="font-size: 30px;width:40px;background:#3498db;color:white;"/>  
-                        <h:commandButton value="-" action="#{ingredientsCtrl.removeIngred(ingred)}" style="font-size: 30px;width:40px;background:#3498db;color:white;"/>
-                    </p:panelGrid>
-                </c:forEach>
-                <h:commandButton value="Reset" action="#{ingredientsCtrl.resetIngred()}" style="font-size: 30px;margin-top: 3%;" />
-            </h:form> 
-        </div>
-        <div style="float:right;width: 30%;text-align: center;padding:0;background:black;border: solid 10px #3498db;margin-top: 2%;margin-right: 10%;min-height: 600px;">
-            <div class="ui-g" style="height: 100px;padding-top: 20%;"> 
-                <div class="ui-g-12"><h:graphicImage value="res/img/burger_top.png" style="max-height: 200px; max-width: 200px;"/></div> 
-            </div>
-            <c:forEach items="#{ingredientsCtrl.composition}" var="ingred">
-                <div class="ui-g" style="height: 100px;"> 
-                    <div class="ui-g-12"><h:graphicImage value="res/img/#{ingred.image}" style="max-height: 200px; max-width: 200px;"/></div>
-                </div>
-            </c:forEach>
-            <div class="ui-g" style="height: 100px;padding-bottom: 20%"> 
-                    <div class="ui-g-12"><h:graphicImage value="res/img/burger_bottom.png" style="max-height: 200px; max-width: 200px;"/></div>
-            </div>
-        </div>
-        
-<!--       Ouverture du panel de login-->
-<h:form>
-        <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
-        <p:dialog header="Login" widgetVar="dlg" resizable="false">
-        <h:panelGrid columns="2" cellpadding="5">
-            <h:outputLabel for="username" value="Username:" />
-            <p:inputText id="username" value="#{customerCtrl.selectedUser.name}" required="true" label="username" />
- 
-            <h:outputLabel for="password" value="Password:" />
-            <p:password id="password" value="#{customerCtrl.selectedUser.password}" required="true" label="password" />
- 
-            <f:facet name="footer">
-                <p:commandButton value="Login" update="growl" actionListener="#{customerCtrl.login(event)}"
-                                 oncomplete="handleLoginRequest(xhr, status, args)" />
-            </f:facet>  
-        </h:panelGrid>
-    </p:dialog>
-    </h:form>
-    
-    
+        <h:form>
+            <center>
+            <h:panelGrid columns="2" cellpadding="5">
+                <f:facet name="header">
+                        <h:graphicImage  value="res/img/user.png" style="max-height: 100px;max-width: 100px;margin-top: 7%;"/>
+                </f:facet>
 
+                <h:outputLabel for="username" value="Nom:" />
+                <p:inputText id="username" value="#{possedeCtrl.user.name}" required="true" label="username" />
+
+                <h:outputLabel for="password" value="Mot de passe:" />
+                <p:password id="password" value="#{possedeCtrl.user.password}" required="true" label="password" />
+
+                <f:facet name="footer">
+                    <p:commandButton value="Login" ajax="false" actionListener="#{customerCtrl.login(event,possedeCtrl.user)}"/>
+                </f:facet>  
+            </h:panelGrid>
+            </center>
+        </h:form>
+        <h:form>
+            <center>
+            <h:outputLink value="javascript:void(0)" onclick="PF('register').show();" title="register" style="font-size: 15px;">
+                <h:outputText value="Inscription"/>
+            </h:outputLink>
+            </center>
+        </h:form>
+        
+         <!--       Ouverture du panel register-->
+        <h:form>
+            <p:dialog header="Inscription" widgetVar="register" resizable="false">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="username" value="Nom:" />
+                    <p:inputText id="username" value="#{possedeCtrl.user.name}" required="true" label="username" />
+
+                    <h:outputLabel for="password" value="Mot de passe:" />
+                    <p:password id="password" value="#{possedeCtrl.user.password}" required="true" label="password" />
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Inscription" ajax="false" actionListener="#{customerCtrl.register(event,possedeCtrl.user)}" action="mainWindow"/>
+                    </f:facet> 
+                </h:panelGrid>
+            </p:dialog>
+         </h:form>
+         
+         
     </h:body>
 </html>

@@ -6,7 +6,10 @@
 package jee;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -27,21 +30,40 @@ public class CustomerCtrl implements Serializable {
     
     @EJB
     private CustomerDAO dao;
-    private Customer selectedUser;
-
-    public Customer getSelectedUser() {
-        return selectedUser;
-    }
-
-    public void setSelectedUser(Customer selectedUser) {
-        this.selectedUser = selectedUser;
-    }
-
-
+    //private Customer user;
+    private PossedeCtrl possede;
+    private boolean loggedIn = false;
+    
     @PostConstruct
     public void init(){
-        selectedUser = new Customer();
+        //user = new Customer();
+        possede = new PossedeCtrl();
     }
+
+    public PossedeCtrl getPossede() {
+        return possede;
+    }
+
+    public void setPossede(PossedeCtrl possede) {
+        this.possede = possede;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+//
+//    public Customer getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(Customer currentUser) {
+//        this.user = currentUser;
+//    }
+
     
    
     public CustomerDAO getDao() {
@@ -51,24 +73,31 @@ public class CustomerCtrl implements Serializable {
     public void setDao(CustomerDAO dao) {
         this.dao = dao;
     }
-
     
-    public void login(ActionEvent event) {
-        RequestContext context = RequestContext.getCurrentInstance();
-        FacesMessage message = null;
-        boolean loggedIn = false;
-        
-        if(selectedUser.getName() != null && selectedUser.getName().equals("admin") && selectedUser.getPassword()!= null && selectedUser.getPassword().equals("admin")) {
-            loggedIn = true;
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", selectedUser.getName());
-        } else {
-            loggedIn = false;
-            message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Loggin Error", "Invalid credentials");
+    public void login(ActionEvent event,Customer user) throws IOException {
+        List<Customer> customers = dao.allCustomer();
+     
+        for(Customer cu : customers){
+            if(cu.getName().equals(user.getName()) && cu.getPassword().equals(user.getPassword())){
+                loggedIn = true;
+                FacesContext.getCurrentInstance().getExternalContext().redirect("mainWindow.xhtml");
+                user = new Customer(cu.getIdCustomer());
+            }
         }
-         
-        FacesContext.getCurrentInstance().addMessage(null, message);
-        context.addCallbackParam("loggedIn", loggedIn);
+
+    }
+    
+    public void register(ActionEvent event,Customer user) throws IOException {
+        
+        if(user.getName() != null && user.getPassword()!= null) {
+            loggedIn = true;
+            possede.setUser(user);
+            dao.add(user);
+            FacesContext.getCurrentInstance().getExternalContext().redirect("mainWindow.xhtml");
+        }
     } 
     
-    
+    public void disconnect(){
+        loggedIn = false;
+    }
 }

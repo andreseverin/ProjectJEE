@@ -9,6 +9,7 @@ import java.io.Console;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -26,12 +27,11 @@ public class IngredientsCtrl implements Serializable{
     @EJB
     private IngredientsDAO dao;
     private Ingredients selectedIngred;
-    private List<Ingredients> composition;
 
 
     public IngredientsCtrl() {
         this.selectedIngred = new Ingredients();
-        composition = new ArrayList<Ingredients>();
+    
     }
 
     public List<Ingredients> getIngredients(){
@@ -54,25 +54,5 @@ public class IngredientsCtrl implements Serializable{
         this.selectedIngred = selectedIngred;
     }
 
-    public List<Ingredients> getComposition() {
-        return composition;
-    }
-
-    public void setComposition(List<Ingredients> composition) {
-        this.composition = composition;
-    }
-    
-    public void addIngred(Ingredients ing){
-        composition.add(0,ing);   
-    }
-    
-    public void removeIngred(Ingredients ing){
-        composition.remove(ing);   
-    }
-    
-    public void resetIngred(){
-        composition.clear();   
-    }
-    
     
 }
